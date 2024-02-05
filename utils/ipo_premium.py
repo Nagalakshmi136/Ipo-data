@@ -40,6 +40,6 @@ def get_data(soup,today_date):
     df.set_index('name',inplace=True)
     df['open'] = pd.to_datetime(df["open"])
     df['close'] = pd.to_datetime(df["close"])
-    # filtered_df = df.loc[df["open"]<today_date & df["close"]>today_date]
-    ipos_data = df.to_dict(orient='index')
+    filtered_df = df[(df["open"]<=today_date) & (df["close"]>=today_date)]
+    ipos_data = filtered_df.to_dict(orient='index')
     return str(ipos_data)

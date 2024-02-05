@@ -26,8 +26,9 @@ def get_gmp_today(driver,url,today_date):
     df = pd.DataFrame(ipos_data)
     df[titles[5]] = pd.to_datetime(df[titles[5]])
     df[titles[6]] = pd.to_datetime(df[titles[6]])
-    filtered_df = df.loc[df[titles[5]]<today_date & df[titles[6]]>today_date]
+    filtered_df = df[(df[titles[5]]<=today_date) & (df[titles[6]]>=today_date)]
     ipos_data = filtered_df.to_dict(orient='index')
+    # driver.quit()
     return str(ipos_data)
 
             
