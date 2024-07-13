@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ipopy"
 version = "0.1.0"
-description = ""
+description = "Fetch IPO (Initial Public Offering) data from different websites and sends it to any WhatsApp contact"
 authors = ["Nagalakshmi136 <naga708523@gmail.com>"]
 readme = "README.md"
 
@@ -10,6 +10,7 @@ python = "^3.10"
 beautifulsoup4 = "^4.12.2"
 requests = "^2.31.0"
 selenium = "^4.16.0"
+pytest = "^8.2.1"
 
 
 [build-system]
