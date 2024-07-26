@@ -24,7 +24,6 @@ def valid_contact_and_date_io() -> List[Tuple[str, str]]:
     ]
 
 
-
 @pytest.fixture
 def invalid_date_io() -> List[Tuple[str, str]]:
     """
@@ -57,7 +56,7 @@ def create_mock_objects_list_with_attributes(attributes: Tuple[str]) -> list[Mag
 
 
 @pytest.fixture
-def valid_mock_find_elements_by_xpath_output()-> List[MagicMock]:
+def valid_mock_find_elements_by_xpath_output() -> List[MagicMock]:
     """
     Returns a valid mock output for the 'find_elements_by_xpath' method.
 
@@ -93,7 +92,7 @@ def valid_mock_find_elements_by_xpath_output()-> List[MagicMock]:
 
 
 @pytest.fixture
-def invalid_mock_find_elements_by_xpath_output()-> List[Dict[str, Any]]:
+def invalid_mock_find_elements_by_xpath_output() -> List[Dict[str, Any]]:
     """
     Returns a list of dictionaries containing mock output and error messages.
 

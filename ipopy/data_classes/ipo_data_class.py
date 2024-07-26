@@ -9,11 +9,11 @@ class IpoDataInfo:
 
     ipo_name: str
     premium: str
-    open_date: str 
+    open_date: str
     close_date: str
     price: str
     allotment_date: str
-    listing_date: str 
+    listing_date: str
 
     def __str__(self) -> str:
         """

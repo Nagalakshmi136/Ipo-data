@@ -75,7 +75,7 @@ class GmpTodayDataFetcher:
                             for column in GMP_TODAY_COLUMNS_ORDER
                         ]
                     )
-                    if 'N.A' not in ipos_data[-1][1]:
+                    if "N.A" not in ipos_data[-1][1]:
                         premium = (
                             100
                             * convert_to_number(ipos_data[-1][1])

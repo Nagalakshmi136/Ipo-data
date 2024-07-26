@@ -31,7 +31,7 @@ def test_open_webdriver():
         assert (
             "chrome" in driver.capabilities["browserName"].lower()
         ), "Browser is not Chrome within context manager."
-        
+
     # After the context manager block, the WebDriver should be closed.
     with pytest.raises(Exception):
         driver.get("https://www.google.com")

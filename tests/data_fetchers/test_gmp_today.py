@@ -110,7 +110,7 @@ def test_get_data_for_changed_positions_of_elements(
             A list of dictionaries containing mock output and error messages.
     """
     current_date = date.today()
-    
+
     # Mocking the find_elements_by_xpath to return invalid data.
     for mock_data in invalid_mock_find_elements_by_xpath_output:
         mock_find_elements_by_xpath.side_effect = [[MagicMock()], mock_data["output"]]

@@ -20,6 +20,7 @@ class ContactNotFoundException(Exception):
             f"Contact with name '{contact_name}' not found in the WhatsApp contact list. Please provide a valid contact name."
         )
 
+
 class ClassNotFoundException(Exception):
     """
     ClassNotFoundException is raised when the specified class is not found in the HTML content.

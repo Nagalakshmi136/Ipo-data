@@ -15,6 +15,7 @@ class EmailNotifier(Notifier):
     """
     A class for sending IPO data via Email.
     """
+
     def __init__(
         self,
         sender_email: str,

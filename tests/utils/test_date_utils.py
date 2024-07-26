@@ -27,7 +27,7 @@ def test_validate_date_format_invalid(invalid_date_format_io: list[tuple[str, st
     Parameters:
         invalid_date_format_io: ``list[tuple[str, str]] ``
             A list of tuples where each tuple
-            contains an invalid date format as the first element and 
+            contains an invalid date format as the first element and
             the expected error message as the second element.
     """
     for invalid_date in invalid_date_format_io:
