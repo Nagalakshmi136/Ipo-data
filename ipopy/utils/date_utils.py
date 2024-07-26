@@ -1,5 +1,7 @@
-from datetime import datetime, date
+from datetime import date, datetime
+
 from ipopy.utils.exceptions import InvalidDateFormatException
+
 
 def validate_date_format(target_date: str) -> date:
     """
@@ -23,9 +25,7 @@ def validate_date_format(target_date: str) -> date:
     month_format_codes = ["m", "b", "B"]
     for month_format_code in month_format_codes:
         try:
-            date_format = (
-                f"%d{date_separator}%{month_format_code}{date_separator}%Y"
-            )
+            date_format = f"%d{date_separator}%{month_format_code}{date_separator}%Y"
             date_obj = datetime.strptime(target_date, date_format).date()
             return date_obj
 

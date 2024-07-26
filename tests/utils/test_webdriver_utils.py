@@ -1,6 +1,7 @@
-from ipopy.utils.webdriver_utils import setup_chrome_driver, open_webdriver
-from selenium.webdriver.chrome.webdriver import WebDriver
 import pytest
+from selenium.webdriver.chrome.webdriver import WebDriver
+
+from ipopy.utils.webdriver_utils import open_webdriver, setup_chrome_driver
 
 
 def test_setup_chrome_driver():

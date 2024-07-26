@@ -1,16 +1,14 @@
 # ipopy
 
-*ipopy* is a genuine, lightweight library for collecting details of newly launching ipo's in the market from different websites along with grey market premium and send this data to your whatsapp contact 
+*ipopy* is a genuine, lightweight library for collecting details of newly launching ipo's in the market from different websites along with grey market premium and send this data to your whatsapp contact and email. It is designed to be simple and easy to use, allowing you to get the data you need with as few steps as possible.
 
 ## Documentation
 
-Detailed documentation about the usage of the library can be found at [ipopy](https://nagalakshmi136.github.io/ipopy/). This is recommended for most cases. If you want to hastily download a single video, the [quick start](#Quickstart) guide below might be what you're looking for.
+Detailed documentation about the usage of the library can be found at [ipopy](https://nagalakshmi136.github.io/ipopy/). This is recommended for most cases. If you want to send ipo data to whatsapp contact the [quick start](#Quickstart) guide below might be what you're looking for.
 
 ## Description
 
-YouTube is the most popular video-sharing platform in the world and as a machine learning engineer or AI engineer, you may encounter a situation where you want to script something to create datasets for training speech recognition models in any 
-particular language for this we need audio and transcripts in that language.
-For this, I present to you: *ipopy*.
+The *ipopy* project is a lightweight library designed to collect details of newly launching IPOs in the market from different websites. It provides information about the IPOs, including the grey market premium, and allows you to send this data to your WhatsApp contacts and email. The library is built to be simple and easy to use, minimizing the steps required to obtain the desired data. With *ipopy*, you can quickly gather IPO information and stay updated with the latest market trends.
 
 ## Quickstart
 
@@ -35,11 +33,12 @@ $ python -m pip install git+https://github.com/Nagalakshmi136/ipopy
 
 
 ```python
- >>> from ipopy.whatsapp_ipo_data_sender import send_ipo_data_to_whatsapp_contact
+ >>> from ipopy.data_fetchers.all_fetchers import fetch_ipo_data
 
- >>> video_ids = yt_data.get_valid_video_ids('cricket news in hindi')
- >>> from ipopy.system_2.preprocess_audio import PreProcessAudio
- >>> PreProcessAudio(source_path, destination_path, background_sound).preprocess_audio()
+ >>> ipo_data = fetch_ipo_data
+ >>> from ipopy.notifiers.whatsapp_notifier import WhatsappNotifier
+ >>> WhatsappNotifier.send_notification(contact_name,
+ ipo_data)
 ```
 
 ## Cloning the repository

@@ -1,9 +1,11 @@
-import pytest
 from datetime import date, timedelta
-from ipopy.models.ipo_data_model import IpoDataInfo
-import requests
-from ipopy.data_fetchers.ipo_premium import IpoPremiumFetcher
 from unittest.mock import MagicMock, patch
+
+import pytest
+import requests
+
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
+from ipopy.data_fetchers.ipo_premium import IpoPremiumFetcher
 from ipopy.utils.exceptions import ClassNotFoundException
 
 
@@ -28,8 +30,9 @@ def test_get_data_returns_valid_data(ipo_premium_fetcher: IpoPremiumFetcher):
     """
     current_date = date.today()
     data = ipo_premium_fetcher.get_data(current_date)
-    assert isinstance(data, list)
-    assert all(isinstance(item, IpoDataInfo) for item in data)
+    assert isinstance(data, tuple)
+    assert isinstance(data[0], str)
+    assert all(isinstance(item, IpoDataInfo) for item in data[1])
 
 
 def test_get_data_handles_connection_error(
@@ -71,7 +74,7 @@ def test_get_data_returns_empty_list_for_long_future_date(
     """
     future_date = date.today() + timedelta(days=30)
     data = ipo_premium_fetcher.get_data(future_date)
-    assert len(data) == 0
+    assert len(data[1]) == 0
 
 
 @patch("requests.get")

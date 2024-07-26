@@ -1,10 +1,12 @@
-from typing import List, Literal
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.remote.webelement import WebElement
 import re
+from typing import List, Literal
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def find_element_by_xpath(wait: WebDriverWait, xpath: Literal["xpath"]) -> WebElement:
     """

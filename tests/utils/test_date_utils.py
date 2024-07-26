@@ -2,8 +2,8 @@ from datetime import datetime
 
 import pytest
 
-from ipopy.utils.exceptions import InvalidDateFormatException
 from ipopy.utils.date_utils import validate_date_format
+from ipopy.utils.exceptions import InvalidDateFormatException
 
 
 def test_validate_date_format_valid(valid_date_format_io: list[tuple[str, datetime]]):

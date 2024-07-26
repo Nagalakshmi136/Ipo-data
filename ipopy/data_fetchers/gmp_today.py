@@ -1,16 +1,17 @@
-from datetime import datetime, date
+from datetime import date, datetime
 
 from selenium.webdriver.support.ui import WebDriverWait
+
 from ipopy.config.config_loader import (
-    GMP_TODAY_TABLE_ROWS_XPATH,
-    GMP_TODAY_DATE_FORMAT,
     GMP_TODAY_COLUMNS_ORDER,
+    GMP_TODAY_DATE_FORMAT,
+    GMP_TODAY_TABLE_ROWS_XPATH,
 )
-from ipopy.utils.webdriver_utils import open_webdriver
-from ipopy.models.ipo_data_model import IpoDataInfo
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
 from ipopy.utils.data_processor import process_ipo_data
-from ipopy.utils.validators import find_elements_by_xpath, convert_to_number
 from ipopy.utils.urls import GMP_TODAY_URL
+from ipopy.utils.validators import convert_to_number, find_elements_by_xpath
+from ipopy.utils.webdriver_utils import open_webdriver
 
 
 class GmpTodayDataFetcher:
@@ -30,7 +31,9 @@ class GmpTodayDataFetcher:
         """
         self.url = GMP_TODAY_URL
 
-    def get_data(self, target_date: date) -> list[IpoDataInfo]:
+    def get_data(
+        self, target_date: date = date.today()
+    ) -> tuple[str, list[IpoDataInfo]]:
         """
         Fetches IPO data from the GMP Today website from the given target date onwards.
 
@@ -43,9 +46,8 @@ class GmpTodayDataFetcher:
 
         Returns:
         -------
-            ``list[IpoDataInfo]``
-                Processed IPO data as a list of IpoDataInfo objects.
-
+            ``tuple[str,list[IpoDataInfo]]``
+                A tuple containing the source website name and the processed IPO data as a list of IpoDataInfo objects.
         """
         with open_webdriver() as driver:
             wait = WebDriverWait(driver, 60)
@@ -73,10 +75,11 @@ class GmpTodayDataFetcher:
                             for column in GMP_TODAY_COLUMNS_ORDER
                         ]
                     )
-                    premium = (
-                        100
-                        * convert_to_number(ipos_data[-1][1])
-                        / convert_to_number(ipos_data[-1][4])
-                    )
-                    ipos_data[-1][1] += f" ({premium:.2f}%)"
-            return process_ipo_data(ipos_data)
+                    if 'N.A' not in ipos_data[-1][1]:
+                        premium = (
+                            100
+                            * convert_to_number(ipos_data[-1][1])
+                            / convert_to_number(ipos_data[-1][4])
+                        )
+                        ipos_data[-1][1] += f" ({premium:.2f}%)"
+            return ("GMP Today", process_ipo_data(ipos_data))

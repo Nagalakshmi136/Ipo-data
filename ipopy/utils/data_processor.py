@@ -1,5 +1,6 @@
 from typing import Any, List
-from ipopy.models.ipo_data_model import IpoDataInfo
+
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
 
 
 def process_ipo_data(ipos_data: List[List[Any]]) -> List[IpoDataInfo]:

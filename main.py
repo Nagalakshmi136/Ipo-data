@@ -1,25 +1,28 @@
-from ipopy.ipo_data_handler import IPODataSender
+import hydra
+from omegaconf import DictConfig, OmegaConf
+from tqdm import tqdm
+
+from ipopy.data_fetchers.all_fetchers import fetch_ipo_data
+from ipopy.notifications.email_notifier import EmailNotifier
+from ipopy.notifications.notifier import Notifier
+from ipopy.notifications.whatsapp_notifier import WhatsappNotifier
 
 
-def main():
-    send_method = input("Enter the method of sending data (whatsapp/email): ").lower()
-    ipo_data_sender = IPODataSender()
-    if send_method == "whatsapp":
-        contact_name = input("Enter the contact name: ")
-        ipo_data_sender.send_via_whatsapp(contact_name)
-    elif send_method == "email":
-        from_email_address = input("Enter your email address: ").encode('ascii', 'ignore').decode('ascii')
-        app_password = input(
-            f"Enter your 16 character app password created for the {from_email_address}: "
-        ).encode('ascii', 'ignore').decode('ascii')
-
-        print(app_password)
-        to_email_address = input("Enter the recipient's email address: ")
-        ipo_data_sender.send_via_email(
-            from_email_address, app_password, to_email_address
-        )
-    else:
-        print("Invalid method entered. Please enter either 'whatsapp' or 'email'.")
+@hydra.main(
+    config_path="ipopy/config", config_name="notifier_config", version_base=None
+)
+def main(cfg: DictConfig):
+    config = OmegaConf.to_container(cfg, resolve=True)
+    target_date = config.pop("target_date")
+    notifier_config = config.pop("notifier")
+    recipients = notifier_config.pop("recipients").split(" ")
+    notifier_config["target_date"] = target_date
+    print(notifier_config)
+    ipo_data_with_sources = fetch_ipo_data(target_date)
+    print(ipo_data_with_sources)
+    notifier = Notifier.by_name(notifier_config.pop("type"))(**notifier_config)
+    for recipient in tqdm(recipients):
+        notifier.send_notification(recipient, ipo_data_with_sources)
 
 
 if __name__ == "__main__":

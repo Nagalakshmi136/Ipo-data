@@ -1,9 +1,11 @@
 from unittest.mock import MagicMock
+
 import pytest
-from ipopy.utils.validators import find_element_by_xpath, find_elements_by_xpath
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import WebDriverWait
+
+from ipopy.utils.validators import find_element_by_xpath, find_elements_by_xpath
 
 
 @pytest.fixture

@@ -1,14 +1,16 @@
-from ipopy.utils.data_processor import process_ipo_data
-from ipopy.utils.exceptions import ClassNotFoundException
+from datetime import date, datetime
+
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, date
+
 from ipopy.config.config_loader import (
-    IPO_PREMIUM_TABLE_CLASS,
-    IPO_PREMIUM_DATE_FORMAT,
     IPO_PREMIUM_COLUMNS_ORDER,
+    IPO_PREMIUM_DATE_FORMAT,
+    IPO_PREMIUM_TABLE_CLASS,
 )
-from ipopy.models.ipo_data_model import IpoDataInfo
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
+from ipopy.utils.data_processor import process_ipo_data
+from ipopy.utils.exceptions import ClassNotFoundException
 from ipopy.utils.urls import IPO_PREMIUM_URL
 
 
@@ -29,7 +31,9 @@ class IpoPremiumFetcher:
         """
         self.url = IPO_PREMIUM_URL
 
-    def get_data(self, target_date: date) -> list[IpoDataInfo]:
+    def get_data(
+        self, target_date: date = date.today()
+    ) -> tuple[str, list[IpoDataInfo]]:
         """
         Fetches IPO data from the Ipo Premium website from the given target date onwards.
 
@@ -42,9 +46,8 @@ class IpoPremiumFetcher:
 
         Returns:
         -------
-            ``list[IpoDataInfo]``
-                Processed IPO data as a list of IpoDataInfo objects.
-
+            ``tuple[str,list[IpoDataInfo]]``
+                A tuple containing the source website name and the processed IPO data as a list of IpoDataInfo objects.
         """
 
         response = requests.get(self.url)
@@ -77,4 +80,4 @@ class IpoPremiumFetcher:
                     [cells[i].get_text().strip() for i in IPO_PREMIUM_COLUMNS_ORDER]
                 )
 
-        return process_ipo_data(ipos_data)
+        return ("IPO Premium", process_ipo_data(ipos_data))

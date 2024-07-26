@@ -1,8 +1,10 @@
-import pytest
 from datetime import datetime, timedelta
-from typing import List, Dict, Any, Tuple
-from ipopy.config.config_loader import GMP_TODAY_DATE_FORMAT
+from typing import Any, Dict, List, Tuple
 from unittest.mock import MagicMock
+
+import pytest
+
+from ipopy.config.config_loader import GMP_TODAY_DATE_FORMAT
 
 
 def create_mock_objects_list_with_attributes(attributes: Tuple[str]) -> list[MagicMock]:

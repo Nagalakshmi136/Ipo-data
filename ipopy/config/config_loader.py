@@ -1,4 +1,5 @@
 import configparser
+
 from ipopy.utils.urls import CONFIG_FILE_PATH
 
 # Initialize the configparser

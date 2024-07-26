@@ -1,9 +1,11 @@
-import pytest
 from datetime import datetime, timedelta
-from typing import List, Dict, Any, Tuple
-from ipopy.models.ipo_data_model import IpoDataInfo
-from ipopy.config.config_loader import GMP_TODAY_DATE_FORMAT
+from typing import Any, Dict, List, Tuple
 from unittest.mock import MagicMock
+
+import pytest
+
+from ipopy.config.config_loader import GMP_TODAY_DATE_FORMAT
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
 
 
 @pytest.fixture

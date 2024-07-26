@@ -1,12 +1,14 @@
-from typing import Any, Dict, List
-import pytest
 from datetime import date
+from typing import Any, Dict, List
 from unittest.mock import MagicMock, patch
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.webdriver import WebDriver
-from ipopy.data_fetchers.gmp_today import GmpTodayDataFetcher
-from ipopy.models.ipo_data_model import IpoDataInfo
+
+import pytest
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+
+from ipopy.data_classes.ipo_data_class import IpoDataInfo
+from ipopy.data_fetchers.gmp_today import GmpTodayDataFetcher
 
 
 @pytest.fixture
@@ -45,8 +47,9 @@ def test_get_data_returns_valid_data(
     current_date = date.today()
     data = gmp_today_data_fetcher.get_data(current_date)
 
-    assert isinstance(data, list)
-    assert all(isinstance(item, IpoDataInfo) for item in data)
+    assert isinstance(data, tuple)
+    assert isinstance(data[0], str)
+    assert all(isinstance(item, IpoDataInfo) for item in data[1])
 
 
 @patch("ipopy.data_fetchers.gmp_today.find_elements_by_xpath")
