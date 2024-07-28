@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ipopy"
 version = "0.1.0"
-description = "Fetch IPO (Initial Public Offering) data from different websites and sends it to any WhatsApp contact"
+description = "Fetch IPO (Initial Public Offering) data from different websites and sends it to any WhatsApp contact or email"
 authors = ["Nagalakshmi136 <naga708523@gmail.com>"]
 readme = "README.md"
 
